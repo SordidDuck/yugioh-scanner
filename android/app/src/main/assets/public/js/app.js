@@ -1,4 +1,4 @@
-import { searchCards, searchByKeywords, MONSTER_TYPES, ATTRIBUTES, RACES } from './api.js';
+import { searchCards, searchByKeywords, fetchCardSets, MONSTER_TYPES, ATTRIBUTES, RACES } from './api.js';
 import {
   getCollection, saveCard, updateQuantity, removeCard, importCollection,
   cacheCard, getCachedCard,
@@ -348,6 +348,15 @@ function fillSelect(id, values) {
 fillSelect('#filter-type', MONSTER_TYPES);
 fillSelect('#filter-attribute', ATTRIBUTES);
 fillSelect('#filter-race', RACES);
+
+fetchCardSets().then(sets => {
+  const datalist = $('#set-list');
+  sets.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.set_name;
+    datalist.appendChild(opt);
+  });
+}).catch(() => {});
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(() => {});
