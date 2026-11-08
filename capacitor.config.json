@@ -1,0 +1,7 @@
+{
+  "appId": "com.yugioh.scanner",
+  "appName": "Yu-Gi-Oh Scanner",
+  "webDir": "www",
+  "android": { "allowMixedContent": false },
+  "server": { "androidScheme": "https" }
+}
