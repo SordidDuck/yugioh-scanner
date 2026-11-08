@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ygo-scanner-v1';
+const CACHE_NAME = 'ygo-scanner-v2';
 const APP_ASSETS = [
   './',
   './index.html',
@@ -31,10 +31,10 @@ self.addEventListener('fetch', (e) => {
       caches.match(e.request).then((cached) =>
         cached ||
         fetch(e.request).then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(e.request, copy));
-          return res;
-        }).catch(() => cached)
+        const copy = res.clone();
+        if (res.ok) caches.open(CACHE_NAME).then((c) => c.put(e.request, copy));
+        return res;
+      }).catch(() => cached)
       )
     );
     return;
